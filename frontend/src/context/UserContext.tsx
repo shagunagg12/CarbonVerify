@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import { API_URL } from '../config';
 
 export interface User {
   id: string;
@@ -24,7 +25,7 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children
     // Fetch users from API (seeded on backend startup)
     const fetchUsers = async () => {
       try {
-        const response = await fetch('${API_URL}/api/users');
+        const response = await fetch(`${API_URL}/api/users`);
         if (response.ok) {
           const data = await response.json();
           setUsers(data);

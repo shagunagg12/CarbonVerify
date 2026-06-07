@@ -56,7 +56,7 @@ export const ReviewBoard: React.FC = () => {
         }
 
         // Fetch metrics
-        const metricsRes = await fetch('${API_URL}/api/documents/metrics');
+        const metricsRes = await fetch(`${API_URL}/api/documents/metrics`);
         if (metricsRes.ok) {
           const metricsData = await metricsRes.json();
           setMetrics(metricsData);

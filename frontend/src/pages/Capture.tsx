@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useUser } from '../context/UserContext';
 import { addToQueue, getQueue } from '../lib/syncQueue';
 import type { QueueItem } from '../lib/syncQueue';
+import { API_URL } from '../config';
 import { Upload, Camera, FileImage, ShieldAlert, CheckCircle, Clock, AlertCircle, RefreshCw } from 'lucide-react';
 
 interface CaptureProps {
@@ -86,7 +87,7 @@ export const Capture: React.FC<CaptureProps> = ({ isOnline, queueTrigger, increm
       formData.append('image', file);
       formData.append('userId', currentUser.id);
 
-      const response = await fetch('${API_URL}/api/documents/upload', {
+      const response = await fetch(`${API_URL}/api/documents/upload`, {
         method: 'POST',
         body: formData,
       });
