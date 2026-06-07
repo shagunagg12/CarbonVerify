@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { useUser } from '../context/UserContext';
 import { addToQueue, getQueue } from '../lib/syncQueue';
 import type { QueueItem } from '../lib/syncQueue';
-import { API_URL } from "../config";
 import { Upload, Camera, FileImage, ShieldAlert, CheckCircle, Clock, AlertCircle, RefreshCw } from 'lucide-react';
 
 interface CaptureProps {
