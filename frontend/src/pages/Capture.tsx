@@ -86,7 +86,7 @@ export const Capture: React.FC<CaptureProps> = ({ isOnline, queueTrigger, increm
       formData.append('image', file);
       formData.append('userId', currentUser.id);
 
-      const response = await fetch('http://localhost:5000/api/documents/upload', {
+      const response = await fetch('${API_URL}/api/documents/upload', {
         method: 'POST',
         body: formData,
       });

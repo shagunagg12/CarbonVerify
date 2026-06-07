@@ -24,7 +24,7 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children
     // Fetch users from API (seeded on backend startup)
     const fetchUsers = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/users');
+        const response = await fetch('${API_URL}/api/users');
         if (response.ok) {
           const data = await response.json();
           setUsers(data);

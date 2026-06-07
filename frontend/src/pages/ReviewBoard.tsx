@@ -48,14 +48,14 @@ export const ReviewBoard: React.FC = () => {
         if (endDate) queryParams.append('endDate', endDate);
 
         // Fetch docs
-        const docsRes = await fetch(`http://localhost:5000/api/documents?${queryParams.toString()}`);
+        const docsRes = await fetch(`${API_URL}/api/documents?${queryParams.toString()}`);
         if (docsRes.ok) {
           const docsData = await docsRes.json();
           setDocuments(docsData);
         }
 
         // Fetch metrics
-        const metricsRes = await fetch('http://localhost:5000/api/documents/metrics');
+        const metricsRes = await fetch('${API_URL}/api/documents/metrics');
         if (metricsRes.ok) {
           const metricsData = await metricsRes.json();
           setMetrics(metricsData);
@@ -287,7 +287,7 @@ export const ReviewBoard: React.FC = () => {
                               <FileText className="h-6 w-6 text-amber-500 animate-pulse" />
                             ) : (
                               <img
-                                src={`http://localhost:5000${doc.filePath}`}
+                                src={`${API_URL}${doc.filePath}`}
                                 alt={doc.filename}
                                 className="w-full h-full object-cover"
                                 onError={(e) => {

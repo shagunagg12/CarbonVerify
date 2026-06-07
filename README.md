@@ -138,7 +138,7 @@ npm install
 npx prisma db push
 npm run dev
 ```
-The backend server will run on `http://localhost:5000`. It automatically seeds mock users on launch.
+The backend server will run on `${API_URL}`. It automatically seeds mock users on launch.
 
 ### 3. Frontend Installation & Run
 Open another terminal in the project root:

@@ -25,7 +25,7 @@ export const DocumentDetail: React.FC = () => {
   const fetchDocument = async () => {
     setLoading(true);
     try {
-      const res = await fetch(`http://localhost:5000/api/documents/${id}`);
+      const res = await fetch(`${API_URL}/api/documents/${id}`);
       if (!res.ok) {
         throw new Error('Failed to load document details');
       }
@@ -54,7 +54,7 @@ export const DocumentDetail: React.FC = () => {
     if (!currentUser) return;
     setSaving(true);
     try {
-      const response = await fetch(`http://localhost:5000/api/documents/${id}/review`, {
+      const response = await fetch(`${API_URL}/api/documents/${id}/review`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -158,7 +158,7 @@ export const DocumentDetail: React.FC = () => {
             
             <div className="relative w-full aspect-[4/5] bg-slate-950 rounded-xl overflow-hidden border border-slate-800 shadow-2xl flex items-center justify-center">
               <img
-                src={`http://localhost:5000${document.filePath}`}
+                src={`${API_URL}${document.filePath}`}
                 alt={document.filename}
                 className="w-full h-full object-contain pointer-events-none select-none"
               />
