@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Search, Eye, Filter, RefreshCw, Compass, FileText, CheckCircle2, XCircle, Clock } from 'lucide-react';
 import { getQueue } from '../lib/syncQueue';
 import type { QueueItem } from '../lib/syncQueue';
+import { API_URL } from "../config";
 
 export const ReviewBoard: React.FC = () => {
   const [documents, setDocuments] = useState<any[]>([]);

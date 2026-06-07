@@ -1,4 +1,5 @@
 import { openDB } from 'idb';
+import { API_URL } from "../config";
 import type { DBSchema, IDBPDatabase } from 'idb';
 
 export interface QueueItem {

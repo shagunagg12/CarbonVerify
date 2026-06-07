@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { useUser } from '../context/UserContext';
 import { getQueue } from '../lib/syncQueue';
 import { Wifi, WifiOff, RefreshCw, Layers } from 'lucide-react';
+import { API_URL } from "../config";
 
 interface HeaderProps {
   isOnline: boolean;
