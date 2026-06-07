@@ -1,0 +1,76 @@
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id        String    @id @default(uuid())
+  name      String
+  role      String    // "OPERATOR", "REVIEWER"
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  auditLogs AuditLog[]
+}
+
+model Document {
+  id             String          @id @default(uuid())
+  filename       String
+  fileHash       String          @unique
+  filePath       String
+  status         String          @default("PROCESSING") // "PROCESSING", "PENDING", "APPROVED", "REJECTED"
+  ocrLog         String?         // Processing error logs if any
+  uploadedAt     DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+  
+  extractedData  ExtractedField?
+  auditLogs      AuditLog[]
+}
+
+model ExtractedField {
+  id             String    @id @default(uuid())
+  documentId     String    @unique
+  document       Document  @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  
+  // Extracted values
+  weight         Float?
+  weightConf     Float?
+  weightBox      String?   // SQLite doesn't have Json type directly in the same way, we can store as string serialized json
+  weightSource   String    @default("OCR") // "OCR" or "MANUAL"
+
+  vehicleNum     String?
+  vehicleNumConf Float?
+  vehicleNumBox  String?
+  vehicleNumSource String  @default("OCR")
+
+  date           String?   
+  dateConf       Float?
+  dateBox        String?
+  dateSource     String    @default("OCR")
+
+  driverName     String?
+  driverNameConf Float?
+  driverNameBox  String?
+  driverNameSource String  @default("OCR")
+
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+}
+
+model AuditLog {
+  id         String   @id @default(uuid())
+  documentId String
+  document   Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  userId     String?  // Can be null if system action (e.g. OCR)
+  user       User?    @relation(fields: [userId], references: [id])
+  
+  action     String   // e.g. "UPLOAD", "OCR_EXTRACT", "EDIT_FIELD", "APPROVED", "REJECTED"
+  field      String?  // e.g. "weight", "vehicleNum", etc.
+  oldValue   String?
+  newValue   String?
+  
+  timestamp  DateTime @default(now())
+}
